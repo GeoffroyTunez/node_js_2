@@ -17,6 +17,25 @@ app.get('/hello', (req, res) => {
   res.send("Bonjour, bienvenue dans notre API !")
 })
 
+app.get('/users/:name', (req, res) => {
+  console.log(req.params.name)
+  var name = req.params.name
+  res.send(`Bonjour, ${name}`)
+})
+
+app.get('/search', (req, res) => {
+  console.log(req.params.search)
+  var query = req.query.search;
+  if (query) {
+    res.send(`Vous avez recherché : ${query}`);
+  } else {
+    res.send("Aucune recherche effectuée.");
+  }
+})
+
+
+
+
 app.get('/users/:id', (req, res) => {
   console.log(req.params.id)
   res.send("Hello from users/id")
