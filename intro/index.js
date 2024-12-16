@@ -41,6 +41,15 @@ app.get('/product/:category/:id', (req,res)=>{
   res.send(`Produit ID ${id} dans la catégorie ${category}`)
 })
 
+app.get('/api/info' , (req,res) =>{
+  var json = {"message": "Bienvenue sur notre API",
+              "status": "succes"
+  }
+  res.setHeader('Content-type', 'application/json');
+ 
+  res.send(JSON.stringify(json));
+})
+
 
 
 
