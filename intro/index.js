@@ -50,6 +50,15 @@ app.get('/api/info' , (req,res) =>{
   res.send(JSON.stringify(json));
 })
 
+app.get('/welcome', (req,res) =>{
+  res.send(
+  
+    "<h1>Bienvenue sur notre site</h1>"+
+    "<p>Explorez nos fonctionnalités ! </p>"
+
+  )
+})
+
 
 
 
