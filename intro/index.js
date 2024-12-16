@@ -59,6 +59,16 @@ app.get('/welcome', (req,res) =>{
   )
 })
 
+app.get('/profile/:username', (req,res)=>{
+  var username = req.params.username
+  var age = req.query.age
+  if(age){
+    res.send(`Profil de ${username}, âge : ${age}`)
+  }else{
+    res.send(`Profil de ${username}, âge non spécifé`)
+  }
+})
+
 
 
 
