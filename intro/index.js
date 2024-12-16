@@ -33,6 +33,14 @@ app.get('/search', (req, res) => {
   }
 })
 
+app.get('/product/:category/:id', (req,res)=>{
+  var category = req.params.category
+  var id = req.params.id  
+  console.log(category)
+  console.log(id)
+  res.send(`Produit ID ${id} dans la catégorie ${category}`)
+})
+
 
 
 
