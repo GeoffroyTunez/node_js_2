@@ -74,3 +74,62 @@ app.get("/welcome", (req, res) => {
     <p> Explorez nos fonctionnalités ! </p>
     `)
 })
+
+
+// Exercice 7 : Combinaison de path et query parameters
+// Crée une route GET à l'adresse /profile/:username qui accepte un paramètre de requête age.
+// Retourne un message personnalisé sous la forme :
+// "Profil de [username], âge : [age]"
+// Si age n'est pas fourni, retourne :
+// "Profil de [username], âge non spécifié."
+app.get("/profile/:username", (req, res) => {
+  const username = req.params.username
+  const age = req.query.age
+
+  if (age) {
+    res.send(`Profil de ${username}, âge : ${age}`)
+  } else {
+    res.send(`Profil de ${username}, âge non spécifié.`)
+  }
+})
+
+
+
+
+// Exercice 8 : Filtrage avec query parameters
+// Crée une route GET à l'adresse /api/users qui accepte un paramètre de requête name.
+// Créer une const Users avec 10 utilisateurs dans un tableau 
+// Si name est fourni, retourne l'utilisateur dont le name correspond.
+// Si aucun utilisateur ne correspond, retourne un message d’erreur JSON
+
+
+const Users = [
+  { id: 1, name: "Jean", email: "jean.dupont@email.com", age: 32 },
+  { id: 2, name: "Marie", email: "marie.martin@email.com", age: 28 },
+  { id: 3, name: "Pierre", email: "pierre.durand@email.com", age: 45 },
+  { id: 4, name: "Sophie", email: "sophie.bernard@email.com", age: 35 },
+  { id: 5, name: "Lucas", email: "lucas.petit@email.com", age: 29 },
+  { id: 6, name: "Emma", email: "emma.leroy@email.com", age: 31 },
+  { id: 7, name: "Thomas", email: "thomas.moreau@email.com", age: 42 },
+  { id: 8, name: "Julie", email: "julie.roux@email.com", age: 26 },
+  { id: 9, name: "Nicolas", email: "nicolas.simon@email.com", age: 38 },
+  { id: 10, name: "Camille", email: "camille.laurent@email.com", age: 33 }
+]
+
+app.get("/api/users", (req, res) => {
+  const name = req.query.name
+
+  const user = Users.find((u) => u.name === name)
+
+  if (user) {
+    res.json(user)
+  } else {
+    res.json({error : "User not found !"})
+  }
+})
+
+
+// app.get("/api/users", (req, res) => {
+//   const user = Users.find((u) => u.name === req.query.name)
+//   res.json(user ?? { error: "User not found !" })
+// })
