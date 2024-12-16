@@ -2,6 +2,8 @@ const express = require("express")
 
 const app = express()
 
+const Users = ["Jhon","Martin","Mark","Julie","Marie","Lora","Loris","Jean","Martine","Jacque"]
+
 app.use( express.json() )
 app.listen(3000, () => {
   console.log("Server running on port 3000")
@@ -68,6 +70,29 @@ app.get('/profile/:username', (req,res)=>{
     res.send(`Profil de ${username}, âge non spécifé`)
   }
 })
+
+app.get('/api/users' ,(req,res)=>{
+  var name = req.query.name
+
+  res.setHeader('Content-type', 'application/json');
+
+  if (name) {
+    const userFound = Users.includes(name);
+
+    
+    if (userFound) {
+      res.send(JSON.stringify({ "message": `Utilisateur ${name} trouvé`, "status": "success" }));
+
+    } else {
+      res.send(JSON.stringify({ "message": "Utilisateur non trouvé", "status": "error" }));
+    }
+
+  } else {
+    res.send(JSON.stringify({ "message": "Aucun nom en paramètre de requête", "status": "error" }));
+  }
+})
+
+
 
 
 
