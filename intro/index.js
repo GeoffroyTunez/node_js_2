@@ -9,6 +9,8 @@ app.listen(3000, () => {
   console.log("Server running on port 3000")
 })
 
+
+// http://localhost:3000/?name=jhon&surname=Doe
 app.get('/', (req, res) => {
   console.log(req.query.name)
   res.send("Hello from express")
