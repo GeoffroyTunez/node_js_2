@@ -1,3 +1,7 @@
+// npm init -y
+// npm i express
+// npm i -D nodemon
+
 const express = require("express")
 
 const app = express()
