@@ -12,6 +12,11 @@ app.get('/', (req, res) => {
   res.send("Hello from express")
 })
 
+app.get('/hello', (req, res) => {
+  console.log(req.query.name)
+  res.send("Bonjour, bienvenue dans notre API !")
+})
+
 app.get('/users/:id', (req, res) => {
   console.log(req.params.id)
   res.send("Hello from users/id")
