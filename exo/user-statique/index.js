@@ -17,6 +17,28 @@ let Users = [{ id: 1, name: "Jean Dupont", age: 32 }, { id: 2, name: "Marie Mart
 let maxId = 10
 
 
+const myXssMiddleware = (req, res,next) => {
+  req.authUser = "Jhon"
+  console.log("global middleware")
+  next()
+}
+// Auth
+// Fields
+// 
+
+
+
+
+app.use(myXssMiddleware)
+
+app.get("/auth-route", (req, res) => {
+
+
+
+  res.send(req.authUser)
+})
+
+
 app.get("/users?page=4&limite=10", (req, res) => {
   res.json(Users)
 })
@@ -37,7 +59,35 @@ app.get("/users/:id", (req, res) => {
   }
 })
 
-app.post("/users", (req, res) => {
+
+
+// Mettez à jour les routes POST et PUT pour inclure une validation des données :
+// Assurez-vous que name est une chaîne non vide et que age est un entier positif.
+// Si les données sont invalides, retournez une erreur 400 avec un message d’erreur JSON
+const nameIsPresent = (req, res, next) => {
+
+  const {name} = req.body
+  if (!name || typeof name != 'string' || name == '') {
+    return res.status(400).json({ message: "Le nom doit être présent" })
+  }
+
+  next()
+}
+
+const ageIsPresentAndPositive = (req, res, next) => {
+
+  const {age} = req.body
+  if (!age || !Number.isInteger(age) || age < 0) {
+    return res.status(400).json({ message: "L'âge doit être présent et positif" })
+  }
+
+  next()
+}
+
+
+
+app.post("/users", [nameIsPresent, ageIsPresentAndPositive], (req, res) => {
+
   const { name, age } = req.body
   maxId++
   const user = { name, age, id: maxId }
@@ -47,12 +97,15 @@ app.post("/users", (req, res) => {
 })
 
 
-app.put("/users/:id", (req, res) => {
+
+
+app.put("/users/:id", [nameIsPresent, ageIsPresentAndPositive], (req, res) => {
   const id = req.params.id
   const { name, age } = req.body
 
-  if (!Users.find(u => u.id == id))
+  if (!Users.find(u => u.id == id)) {
     return res.status(404).json({ message: "User not found !" })
+  }
 
   Users.filter(u => u.id != id)
   Users.push({ name, age, id })
@@ -72,5 +125,6 @@ app.delete("/users/:id", (req, res) => {
     res.status(404).json({ message: "User not found !" })
   }
 })
+
 
 
