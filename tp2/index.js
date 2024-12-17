@@ -1,11 +1,10 @@
 const Users = import("./app/model/Users")
-const UsersController = import("./app/controller/usersController")
 const UsersRouter = import("./app/router/usersRouter")
 const express = require("express")
 
 const app = express()
 app.use(express.json());
-
+app.use('/users',UsersRouter)
 
 const myMildware = (req, res, next) => {
     console.log('Middleware actif');
