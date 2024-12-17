@@ -10,7 +10,6 @@ function gettingStarted() {
 
 console.log(gettingStarted());
 
-
 /**
  * Vous n'avez rien a faire sur cet exercice
  * Vous pouvez passer a l'exercice suivant
