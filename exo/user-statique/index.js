@@ -6,6 +6,13 @@ const express = require("express")
 
 const app = express()
 
+app.use((req, res, next) => {
+  setTimeout(() => {
+    next()
+  }, 2000)
+})
+
+
 app.use(express.json())
 
 app.listen(3000, () => {
@@ -17,11 +24,13 @@ let Users = [{ id: 1, name: "Jean Dupont", age: 32 }, { id: 2, name: "Marie Mart
 let maxId = 10
 
 
-const myXssMiddleware = (req, res,next) => {
+const myXssMiddleware = (req, res, next) => {
   req.authUser = "Jhon"
   console.log("global middleware")
   next()
 }
+
+
 // Auth
 // Fields
 // 
@@ -39,9 +48,38 @@ app.get("/auth-route", (req, res) => {
 })
 
 
-app.get("/users?page=4&limite=10", (req, res) => {
-  res.json(Users)
+
+// Ajoutez une fonctionnalité de pagination à la route GET /users.
+// Acceptez deux paramètres de requête : page (numéro de page) et limit (nombre d’éléments par page).
+// Retournez uniquement les utilisateurs correspondant à la page demandée.
+// Exemple de requête :
+// GET /users?page=1&limit=2
+
+
+app.get("/users", (req, res) => {
+  const page = parseInt(req.query.page) || 1
+  const limit = parseInt(req.query.limit) || 3
+  const data = Users.slice(((page - 1) * limit), page * limit)
+
+  const result = {
+    totalPages: Math.round(Users.length / limit),
+    currentPage: page,
+    limit: limit,
+    links: {
+      prev: `http://localhost:3000/users?page=${page - 1}&limit=${limit}`,
+      current: `http://localhost:3000/users?page=${page}&limit=${limit}`,
+      next: `http://localhost:3000/users?page=${page + 1}&limit=${limit}`
+    },
+    data
+  }
+
+  res.json(result)
 })
+
+
+
+
+
 
 app.get("/users/search", (req, res) => {
   const searchField = req.query.name
@@ -66,7 +104,7 @@ app.get("/users/:id", (req, res) => {
 // Si les données sont invalides, retournez une erreur 400 avec un message d’erreur JSON
 const nameIsPresent = (req, res, next) => {
 
-  const {name} = req.body
+  const { name } = req.body
   if (!name || typeof name != 'string' || name == '') {
     return res.status(400).json({ message: "Le nom doit être présent" })
   }
@@ -76,7 +114,7 @@ const nameIsPresent = (req, res, next) => {
 
 const ageIsPresentAndPositive = (req, res, next) => {
 
-  const {age} = req.body
+  const { age } = req.body
   if (!age || !Number.isInteger(age) || age < 0) {
     return res.status(400).json({ message: "L'âge doit être présent et positif" })
   }
@@ -127,4 +165,8 @@ app.delete("/users/:id", (req, res) => {
 })
 
 
+const notFound = (req, res) => {
+  res.status(404).json({ message: "Page not found !" })
+}
 
+app.use(notFound)
