@@ -22,7 +22,14 @@ const urls = [
   "https://jsonplaceholder.typicode.com/todos/3"
 ]
 
-const parallel 
+const parallel = async () => {
+  try {
+    const results = await Promise.all(urls.map(url => apiResponse(url)))
+    return results
+  } catch (error) {
+    console.error("Erreur lors des appels API:", error)
+  }
+}
 
 
 module.exports = { parallel };

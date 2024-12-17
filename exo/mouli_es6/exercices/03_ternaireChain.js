@@ -9,6 +9,10 @@
  *    - utiliser l'opérateur ternaire (if interdit)
  */
 
-function ternaryChain
+function ternaryChain(a,b){
+    return a > b ? ">" : 
+            b > a ? "<":
+            "="
+}
 
 module.exports = ternaryChain;
