@@ -1,0 +1,1055 @@
+<html><head><meta charset="utf-8"/><title>Test Report</title><style type="text/css">html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+body {
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+}
+#jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/** SUMMARY */
+#summary {
+  color: #333;
+  margin: 2rem 0;
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 2rem;
+  background: #eee;
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 2rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: #4f8a10;
+  border-left: 0.4rem solid #4f8a10;
+  padding-left: 0.5rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: #d8000c;
+  border-left: 0.4rem solid #d8000c;
+  padding-left: 0.5rem;
+}
+.summary-pending {
+  color: #9f6000;
+  border-left: 0.4rem solid #9f6000;
+  padding-left: 0.5rem;
+}
+.summary-empty {
+  color: #999;
+  border-left: 0.4rem solid #999;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: #dff2bf;
+  color: #4f8a10;
+}
+.test-result.failed {
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.test-result.pending {
+  background-color: #ffdf61;
+  color: #9f6000;
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed #d8000c;
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 2rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: #eee;
+  color: #777;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.75rem;
+}
+.suite-info .suite-time.warn {
+  background-color: #d8000c;
+  color: #fff;
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #efefef;
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: #777;
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><div id="jesthtml-content"><header><h1 id="title">Test Report</h1></header><div id="metadata-container"><div id="timestamp">Started: 2024-12-16 13:00:07</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (13)</div><div class="summary-passed">1 passed</div><div class="summary-failed">12 failed</div><div class="summary-pending summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (6)</div><div class="summary-passed">3 passed</div><div class="summary-failed">3 failed</div><div class="summary-pending summary-empty">0 pending</div></div></div></div><div id="suite-1" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/01_gettingStarted.specs.js</div><div class="suite-time">1.083s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">01_Example.js</div><div class="test-title">should not contain console.log</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">01_Example.js</div><div class="test-title">should return hello world</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div></div><div class="suite-consolelog"><div class="suite-consolelog-header">Console Log</div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at Object.log (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/01_gettingStarted.js:11:9)
+    at Runtime._execModule (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:1377:24)
+    at Runtime._loadModule (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:989:12)
+    at Runtime.requireModule (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:849:12)
+    at Runtime.requireModuleOrMock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:1009:21)
+    at Object.require (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/01_gettingStarted.specs.js:3:17)
+    at Runtime._execModule (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:1377:24)
+    at Runtime._loadModule (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:989:12)
+    at Runtime.requireModule (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runtime/build/index.js:849:12)
+    at jestAdapter (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at runTestInternal (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:444:34)</pre><pre class="suite-consolelog-item-message">hello world</pre></div></div></div><div id="suite-2" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/02_ternaire.specs.js</div><div class="suite-time">0.296s</div></div><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename">02_Ternaire</div><div class="test-title">Should handle equality</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m3[39m
+Received: [31mundefined[39m
+    at Object.toBe (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/02_ternaire.specs.js:13:28)
+    at Promise.then.completed (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/utils.js:289:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/utils.js:222:10)
+    at _callCircusTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:248:40)
+    at _runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:184:3)
+    at _runTestsForDescribeBlock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:86:9)
+    at _runTestsForDescribeBlock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:81:9)
+    at run (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:26:3)
+    at runAndTransformResultsToJestFormat (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:120:21)
+    at jestAdapter (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:444:34)</pre></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">02_Ternaire</div><div class="test-title">Should not contain if</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">02_Ternaire</div><div class="test-title">Should return a</div><div class="test-status">failed</div><div class="test-duration">0.004s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m3[39m
+Received: [31mundefined[39m
+    at Object.toBe (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/02_ternaire.specs.js:7:28)
+    at Promise.then.completed (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/utils.js:289:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/utils.js:222:10)
+    at _callCircusTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:248:40)
+    at _runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:184:3)
+    at _runTestsForDescribeBlock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:86:9)
+    at _runTestsForDescribeBlock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:81:9)
+    at run (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:26:3)
+    at runAndTransformResultsToJestFormat (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:120:21)
+    at jestAdapter (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:444:34)</pre></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">02_Ternaire</div><div class="test-title">Should return b</div><div class="test-status">failed</div><div class="test-duration">0.001s</div></div><div class="failureMessages"> <pre class="failureMsg">Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m5[39m
+Received: [31mundefined[39m
+    at Object.toBe (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/02_ternaire.specs.js:10:28)
+    at Promise.then.completed (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/utils.js:289:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/utils.js:222:10)
+    at _callCircusTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:248:40)
+    at _runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:184:3)
+    at _runTestsForDescribeBlock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:86:9)
+    at _runTestsForDescribeBlock (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:81:9)
+    at run (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/run.js:26:3)
+    at runAndTransformResultsToJestFormat (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:120:21)
+    at jestAdapter (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/node_modules/jest-runner/build/runTest.js:444:34)</pre></div></div></div></div><div id="suite-3" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/03_ternaireChain.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/03_ternaireChain.js: Unexpected token, expected "(" (14:0)
+
+    [0m [90m 12 |[39m [36mfunction[39m ternaryChain[0m
+    [0m [90m 13 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 14 |[39m module[33m.[39mexports [33m=[39m ternaryChain[33m;[39m[0m
+    [0m [90m    |[39m [31m[1m^[22m[39m[0m
+    [0m [90m 15 |[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m [90m 2 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 3 |[39m [36mconst[39m ternaire [33m=[39m require([32m"../exercices/03_ternaireChain"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                  [31m[1m^[22m[39m[0m
+    [0m [90m 4 |[39m[0m
+    [0m [90m 5 |[39m describe([32m'03_Ternaire'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 6 |[39m   it([32m"Should return a"[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as unexpected] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1497:16)[22m
+      [2mat Parser.unexpected [as expect] ([22mnode_modules/@babel/parser/src/parser/util.ts[2m:145:28)[22m
+      [2mat Parser.expect [as parseFunctionParams] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1602:10)[22m
+      [2mat Parser.parseFunctionParams [as parseFunction] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1564:10)[22m
+      [2mat Parser.parseFunction [as parseFunctionStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:968:17)[22m
+      [2mat Parser.parseFunctionStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:446:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/03_ternaireChain.specs.js[39m[0m[2m:3:18)[22m
+</pre></div></div></div></div><div id="suite-4" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/04_arrow.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/04_arrow.js: Missing initializer in const declaration. (10:12)
+
+    [0m [90m  8 |[39m [90m */[39m[0m
+    [0m [90m  9 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 10 |[39m [36mconst[39m arrow1 [0m
+    [0m [90m    |[39m             [31m[1m^[22m[39m[0m
+    [0m [90m 11 |[39m [90m/**[39m[0m
+    [0m [90m 12 |[39m [90m * Déclarer une fonction fléchée qui renvoi l'argument + 1[39m[0m
+    [0m [90m 13 |[39m [90m * Le return est implicite[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m [90m 2 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 3 |[39m [36mconst[39m {arrow1[33m,[39m arrow2} [33m=[39m require([32m"../exercices/04_arrow"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                          [31m[1m^[22m[39m[0m
+    [0m [90m 4 |[39m[0m
+    [0m [90m 5 |[39m describe([32m'04_arrow'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 6 |[39m   it([32m"arrow1 - Should return a+1"[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/04_arrow.specs.js[39m[0m[2m:3:26)[22m
+</pre></div></div></div></div><div id="suite-5" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/05_arrayOperations.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/05_arrayOperations.js: Missing initializer in const declaration. (13:19)
+
+    [0m [90m 11 |[39m [90m  */[39m[0m
+    [0m [90m 12 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 13 |[39m [36mconst[39m multiplyByTwo [0m
+    [0m [90m    |[39m                    [31m[1m^[22m[39m[0m
+    [0m [90m 14 |[39m[0m
+    [0m [90m 15 |[39m [90m/**[39m[0m
+    [0m [90m 16 |[39m [90m * Utiliser la fonction .filter sur le tableau passé en paramètre[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m [90m 2 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 3 |[39m [36mconst[39m {multiplyByTwo[33m,[39m filterNameStartByA[33m,[39m sum[33m,[39m findUserById} [33m=[39m require([32m"../exercices/05_arrayOperations"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                                                                [31m[1m^[22m[39m[0m
+    [0m [90m 4 |[39m[0m
+    [0m [90m 5 |[39m describe([32m'multiplyByTwo'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 6 |[39m     test([32m'should return an array with all values multiplied by 2'[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/05_arrayOperations.specs.js[39m[0m[2m:3:64)[22m
+</pre></div></div></div></div><div id="suite-6" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/06_composition.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/06_composition.js: Missing initializer in const declaration. (11:12)
+
+    [0m [90m  9 |[39m [90m */[39m[0m
+    [0m [90m 10 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 11 |[39m [36mconst[39m concat [0m
+    [0m [90m    |[39m             [31m[1m^[22m[39m[0m
+    [0m [90m 12 |[39m[0m
+    [0m [90m 13 |[39m [90m/**[39m[0m
+    [0m [90m 14 |[39m [90m * utiliser l'opérateur de composition ... afin d'ajouter un élément à un tableau[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m [90m 2 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 3 |[39m [36mconst[39m {concat[33m,[39m push[33m,[39m merge[33m,[39m setName} [33m=[39m require([32m"../exercices/06_composition"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                                        [31m[1m^[22m[39m[0m
+    [0m [90m 4 |[39m[0m
+    [0m [90m 5 |[39m describe([32m'concat'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 6 |[39m     test([32m"should concat two arrays"[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/06_composition.specs.js[39m[0m[2m:3:40)[22m
+</pre></div></div></div></div><div id="suite-7" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/07_destructuration.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/07_destructuration.js: Missing initializer in const declaration. (15:21)
+
+    [0m [90m 13 |[39m [90m */[39m[0m
+    [0m [90m 14 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 15 |[39m [36mconst[39m extractFirstTwo [0m
+    [0m [90m    |[39m                      [31m[1m^[22m[39m[0m
+    [0m [90m 16 |[39m [90m/**[39m[0m
+    [0m [90m 17 |[39m [90m * utilisez la décomposition pour extraire la premiere case du tableau et le reste du tableau[39m[0m
+    [0m [90m 18 |[39m [90m * retournez uniquement le reste du tableau reçu en paramère [39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m [90m 2 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 3 |[39m [36mconst[39m {extractFirstTwo[33m,[39m extractRest[33m,[39m extractName[33m,[39m removePassword} [33m=[39m require([32m"../exercices/07_destructuration"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                                                                     [31m[1m^[22m[39m[0m
+    [0m [90m 4 |[39m[0m
+    [0m [90m 5 |[39m describe([32m'extractFirstTwo'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 6 |[39m     test([32m'should extract the first two elements of an array'[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/07_destructuration.specs.js[39m[0m[2m:3:69)[22m
+</pre></div></div></div></div><div id="suite-8" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/08_chainingOperator.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/08_chainingOperator.js: Missing initializer in const declaration. (18:18)
+
+    [0m [90m 16 |[39m [90m */[39m[0m
+    [0m [90m 17 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 18 |[39m [36mconst[39m getGroupName [0m
+    [0m [90m    |[39m                   [31m[1m^[22m[39m[0m
+    [0m [90m 19 |[39m[0m
+    [0m [90m 20 |[39m[0m
+    [0m [90m 21 |[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m"@jest/globals"[39m)[33m;[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 2 |[39m [36mconst[39m {getGroupName} [33m=[39m require([32m"../exercices/08_chainingOperator"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                        [31m[1m^[22m[39m[0m
+    [0m [90m 3 |[39m[0m
+    [0m [90m 4 |[39m describe([32m'getGroupName'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 5 |[39m     test([32m'should return the group name'[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/08_chainingOperator.specs.js[39m[0m[2m:2:24)[22m
+</pre></div></div></div></div><div id="suite-9" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/09_strings.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/09_strings.js: Missing initializer in const declaration. (13:12)
+
+    [0m [90m 11 |[39m [90m */[39m[0m
+    [0m [90m 12 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 13 |[39m [36mconst[39m concat [0m
+    [0m [90m    |[39m             [31m[1m^[22m[39m[0m
+    [0m [90m 14 |[39m[0m
+    [0m [90m 15 |[39m module[33m.[39mexports [33m=[39m {concat}[33m;[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 2 |[39m [36mconst[39m {concat} [33m=[39m require([32m"../exercices/09_strings"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                  [31m[1m^[22m[39m[0m
+    [0m [90m 3 |[39m[0m
+    [0m [90m 4 |[39m describe([32m'concat'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 5 |[39m     test([32m'should concat the first and last name'[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/09_strings.specs.js[39m[0m[2m:2:18)[22m
+</pre></div></div></div></div><div id="suite-10" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/10_promise.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/10_promise.js: Missing initializer in const declaration. (8:11)
+
+    [0m [90m  6 |[39m [90m */[39m[0m
+    [0m [90m  7 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m  8 |[39m [36mconst[39m sleep [0m
+    [0m [90m    |[39m            [31m[1m^[22m[39m[0m
+    [0m [90m  9 |[39m   [0m
+    [0m [90m 10 |[39m[0m
+    [0m [90m 11 |[39m module[33m.[39mexports [33m=[39m {sleep}[33m;[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 2 |[39m [36mconst[39m {sleep} [33m=[39m require([32m"../exercices/10_promise"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                 [31m[1m^[22m[39m[0m
+    [0m [90m 3 |[39m[0m
+    [0m [90m 4 |[39m describe([32m'sleep'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 5 |[39m     test([32m'should wait 2 seconds'[39m[33m,[39m [36masync[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/10_promise.specs.js[39m[0m[2m:2:17)[22m
+</pre></div></div></div></div><div id="suite-11" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/11_async.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/11_async.js: Missing initializer in const declaration. (14:15)
+
+    [0m [90m 12 |[39m [90m * [39m[0m
+    [0m [90m 13 |[39m [90m */[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 14 |[39m [36mconst[39m usingThen[0m
+    [0m [90m    |[39m                [31m[1m^[22m[39m[0m
+    [0m [90m 15 |[39m [90m/**[39m[0m
+    [0m [90m 16 |[39m [90m * Créez une fonction asynchrone qui attend 2 seconde puis execute le callback passé en paramètre[39m[0m
+    [0m [90m 17 |[39m [90m * vous pouvez utiliser la fonction sleep créé précedement: const {sleep} = require("../exercices/10_promise");[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 2 |[39m [36mconst[39m {usingThen[33m,[39m usingAwait[33m,[39m apiResponse} [33m=[39m require([32m"../exercices/11_async"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                                              [31m[1m^[22m[39m[0m
+    [0m [90m 3 |[39m[0m
+    [0m [90m 4 |[39m [36mconst[39m sleep [33m=[39m (ms) [33m=&gt;[39m [36mnew[39m [33mPromise[39m((resolve) [33m=&gt;[39m setTimeout(resolve[33m,[39m ms))[33m;[39m[0m
+    [0m [90m 5 |[39m[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/11_async.specs.js[39m[0m[2m:2:46)[22m
+</pre></div></div></div></div><div id="suite-12" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/12_parallel.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/12_parallel.js: Missing initializer in const declaration. (25:14)
+
+    [0m [90m 23 |[39m ][0m
+    [0m [90m 24 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 25 |[39m [36mconst[39m parallel [0m
+    [0m [90m    |[39m               [31m[1m^[22m[39m[0m
+    [0m [90m 26 |[39m[0m
+    [0m [90m 27 |[39m[0m
+    [0m [90m 28 |[39m module[33m.[39mexports [33m=[39m { parallel }[33m;[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 2 |[39m [36mconst[39m {parallel} [33m=[39m require([32m"../exercices/12_parallel"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                    [31m[1m^[22m[39m[0m
+    [0m [90m 3 |[39m [36mconst[39m axios [33m=[39m require([32m"axios"[39m)[33m;[39m[0m
+    [0m [90m 4 |[39m[0m
+    [0m [90m 5 |[39m describe([32m'parallel'[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/12_parallel.specs.js[39m[0m[2m:2:20)[22m
+</pre></div></div></div></div><div id="suite-13" class="suite-container"><div class="suite-info"><div class="suite-path">/home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/__tests__/13_bonus.specs.js</div><div class="suite-time">0s</div></div><div class="suite-tests"><div class="test-result failed"><div class="failureMessages suiteFailure"> <pre class="failureMsg">  [1m● [22mTest suite failed to run
+
+    [1m[31mJest encountered an unexpected token[39m[22m
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see [4mhttps://jestjs.io/docs/ecmascript-modules[24m for how to enable it.
+     • If you are trying to use TypeScript, see [4mhttps://jestjs.io/docs/getting-started#using-typescript[24m
+     • To have some of your "node_modules" files transformed, you can specify a custom [1m"transformIgnorePatterns"[22m in your config.
+     • If you need a custom transformation specify a [1m"transform"[22m option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the [1m"moduleNameMapper"[22m config option.
+
+    You'll find more details and examples of these config options in the docs:
+    [36mhttps://jestjs.io/docs/configuration[39m
+    For information about custom transformations, see:
+    [36mhttps://jestjs.io/docs/code-transformation[39m
+
+    [1m[31mDetails:[39m[22m
+
+    SyntaxError: /home/geoffroy/Documents/cours js/node_js/node_js_2/diginamic-node-js-24-12/exo/mouli_es6/exercices/13_bonus.js: Missing initializer in const declaration. (27:16)
+
+    [0m [90m 25 |[39m [90m */[39m[0m
+    [0m [90m 26 |[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 27 |[39m [36mconst[39m countWords[0m
+    [0m [90m    |[39m                 [31m[1m^[22m[39m[0m
+    [0m [90m 28 |[39m[0m
+    [0m [90m 29 |[39m[0m
+    [0m [90m 30 |[39m [90m/**[39m[0m
+
+    [0m [90m 1 |[39m [36mconst[39m {describe[33m,[39m expect[33m,[39m test} [33m=[39m require([32m'@jest/globals'[39m)[33m;[39m[0m
+    [0m[31m[1m&gt;[22m[39m[90m 2 |[39m [36mconst[39m {countWords[33m,[39m sortObjectByValue} [33m=[39m require([32m"../exercices/13_bonus"[39m)[33m;[39m[0m
+    [0m [90m   |[39m                                         [31m[1m^[22m[39m[0m
+    [0m [90m 3 |[39m[0m
+    [0m [90m 4 |[39m describe([32m'countWords'[39m[33m,[39m () [33m=&gt;[39m {[0m
+    [0m [90m 5 |[39m   it([32m'devrait compter la fréquence des mots correctement'[39m[33m,[39m () [33m=&gt;[39m {[0m
+
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error/credentials.ts[2m:62:21)[22m
+      [2mat instantiate ([22mnode_modules/@babel/parser/src/parse-error.ts[2m:60:12)[22m
+      [2mat Parser.toParseError [as raise] ([22mnode_modules/@babel/parser/src/tokenizer/index.ts[2m:1456:19)[22m
+      [2mat Parser.raise [as parseVar] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1493:16)[22m
+      [2mat Parser.parseVar [as parseVarStatement] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1138:10)[22m
+      [2mat Parser.parseVarStatement [as parseStatementContent] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:524:21)[22m
+      [2mat Parser.parseStatementContent [as parseStatementLike] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:406:17)[22m
+      [2mat Parser.parseStatementLike [as parseModuleItem] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:351:17)[22m
+      [2mat Parser.parseModuleItem [as parseBlockOrModuleBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1331:16)[22m
+      [2mat Parser.parseBlockOrModuleBlockBody [as parseBlockBody] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:1305:10)[22m
+      [2mat Parser.parseBlockBody [as parseProgram] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:224:10)[22m
+      [2mat Parser.parseProgram [as parseTopLevel] ([22mnode_modules/@babel/parser/src/parser/statement.ts[2m:206:25)[22m
+      [2mat Parser.parseTopLevel [as parse] ([22mnode_modules/@babel/parser/src/parser/index.ts[2m:45:10)[22m
+      [2mat parse ([22mnode_modules/@babel/parser/src/index.ts[2m:67:38)[22m
+      [2mat parser ([22mnode_modules/@babel/core/src/parser/index.ts[2m:28:19)[22m
+          at parser.next (&lt;anonymous&gt;)
+      [2mat normalizeFile ([22mnode_modules/@babel/core/src/transformation/normalize-file.ts[2m:52:24)[22m
+          at normalizeFile.next (&lt;anonymous&gt;)
+      [2mat run ([22mnode_modules/@babel/core/src/transformation/index.ts[2m:38:36)[22m
+          at run.next (&lt;anonymous&gt;)
+      [2mat transform ([22mnode_modules/@babel/core/src/transform.ts[2m:29:20)[22m
+          at transform.next (&lt;anonymous&gt;)
+      [2mat evaluateSync ([22mnode_modules/gensync/index.js[2m:251:28)[22m
+      [2mat sync ([22mnode_modules/gensync/index.js[2m:89:14)[22m
+      [2mat fn ([22mnode_modules/@babel/core/src/errors/rewrite-stack-trace.ts[2m:97:14)[22m
+      [2mat transformSync ([22mnode_modules/@babel/core/src/transform.ts[2m:66:52)[22m
+      [2mat ScriptTransformer.transformSource ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:519:31)[22m
+      [2mat ScriptTransformer._transformAndBuildScript ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:648:40)[22m
+      [2mat ScriptTransformer.transform ([22mnode_modules/@jest/transform/build/ScriptTransformer.js[2m:700:19)[22m
+      [2mat Object.require ([22m[0m[36m__tests__/13_bonus.specs.js[39m[0m[2m:2:41)[22m
+</pre></div></div></div></div></div></body></html>
