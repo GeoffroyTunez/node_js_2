@@ -13,3 +13,14 @@ app.use(notFoundMiddleware);
 app.listen(3000, () => {
     console.log("App running on port 3000");
 });
+
+var user = "geoffroytunez"
+var password = "ncwDmCRkAYCUkQW3"
+
+mongoose.connect(`mongodb+srv://${user}:${password}@testuser.zulag.mongodb.net/?retryWrites=true&w=majority&appName=testUser`)
+  .then(() => {
+    console.log("MongoDB connected successfully");
+  })
+  .catch((err) => {
+    console.log({ message: "Not connected", error: err });
+  });
