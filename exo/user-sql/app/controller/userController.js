@@ -1,43 +1,42 @@
-let {Users, maxId} = require("../model/Users")
+let { Users } = require("../model/Users")
 const controller = {}
 
 controller.index = (req, res) => {
   const page = parseInt(req.query.page) || 1
   const limit = parseInt(req.query.limit) || 3
-  const data = Users.slice(((page - 1) * limit), page * limit)
 
-  const result = {
-    totalPages: Math.round(Users.length / limit),
-    currentPage: page,
+  Users.findAndCountAll({
     limit: limit,
-    links: {
-      prev: `http://localhost:3000/users?page=${page - 1}&limit=${limit}`,
-      current: `http://localhost:3000/users?page=${page}&limit=${limit}`,
-      next: `http://localhost:3000/users?page=${page + 1}&limit=${limit}`
-    },
-    data
-  }
-
-  res.json(result)
+    offset: (page - 1) * limit,
+  }).then((data) => {
+    res.json({
+      totalPages: Math.round(data.count / limit),
+      currentPage: page,
+      limit: limit,
+      links: {
+        prev: `http://localhost:3000/users?page=${page - 1}&limit=${limit}`,
+        current: `http://localhost:3000/users?page=${page}&limit=${limit}`,
+        next: `http://localhost:3000/users?page=${page + 1}&limit=${limit}`
+      },
+      data: data.rows
+    })
+  })
 }
 
-
-controller.search = (req, res) => {
+controller.search = async (req, res) => {
   const searchField = req.query.name
-  const queryResult = Users.filter((u) => u.name.toLocaleLowerCase() === searchField.toLocaleLowerCase())
-  res.json(queryResult)
+  // Users.findOne({where : { name : `%${searchField}%`}} ).then( u => {
+  Users.findAll({ where: { name: `%${searchField}%` } }).then(u => {
+    res.json(u)
+  })
 }
-
-
 
 controller.show = (req, res) => {
-  const id = req.params.id
-  const user = Users.find((u) => u.id == id)
-  if (user) {
+  Users.findByPK(parseInt(req.params.id)).then((user) => {
     res.json(user)
-  } else {
-    res.status(404).json({ message: "User not found !" })
-  }
+  }).catch((err) => {
+    res.status(400).json({ message: "User not found !" })
+  })
 }
 
 
@@ -47,30 +46,22 @@ controller.create = async (req, res) => {
 }
 
 controller.update = (req, res) => {
-  const id = req.params.id
   const { name, age } = req.body
 
-  if (!Users.find(u => u.id == id)) {
-    return res.status(404).json({ message: "User not found !" })
-  }
-
-  Users.filter(u => u.id != id)
-  Users.push({ name, age, id })
-  res.json({ name, age, id })
+  Users.update({ name, age }, { where: { id: parseInt(req.params.id) } }).then((u) => {
+    res.json({ message: "User updated", u })
+  }).catch((err) => {
+    res.status(400).json({ message: "User not found !" })
+  })
 }
 
 
 controller.destroy = (req, res) => {
-  const id = req.params.id
-
-  const toDel = User.find((u) => u.id == id)
-
-  if (toDel) {
-    Users = Users.filter((u) => u.id != id)
-    res.json(toDel)
-  } else {
-    res.status(404).json({ message: "User not found !" })
-  }
+  Users.destroy({ where: { id: parseInt(req.params.id) } }).then((u) => {
+    res.json({ message: "User deleted", u })
+  }).catch((err) => {
+    res.status(400).json({ message: "User not found !" })
+  })
 }
 
 module.exports = controller
