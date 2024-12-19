@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .btn {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .btn-update {
+            background-color: #007bff;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btn-add {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des utilisateurs</h1>
+
+    <a href="/view/add-user" class="btn btn-add">Ajouter un utilisateur</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Âge</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><a href="/view/detail/<%= user.id %>"><%= user.name %></a></td>
+                    <td><%= user.age %></td>
+                    <td>
+                        <a href="/view/update-user/<%= user.id %>" class="btn btn-update">Modifier</a>
+                        
+                        <!-- Correction ici -->
+                        <button onclick="deleteUser('<%= user.id %>')" class="btn btn-delete" style="background-color: red; color: white;">Supprimer</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+    async function deleteUser(id) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+            try {
+                const response = await fetch(`/users/delete/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (response.ok) {
+                    alert("Utilisateur supprimé avec succès")
+                    window.location.reload()
+                } else {
+                    const error = await response.json()
+                    alert(error.message || "Erreur lors de la suppression")
+                }
+            } catch (err) {
+                console.error("Erreur :", err)
+                alert("Une erreur est survenue.")
+            }
+        }
+    }
+</script>

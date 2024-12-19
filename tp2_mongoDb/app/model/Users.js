@@ -1,10 +1,8 @@
-const db = require("../../config/databases")
-const sequelize = require("sequelize")
+const mongoose = require("mongoose")
 
-const Users = db.define('users', {
-    id : { type : sequelize.INTEGER, primaryKey : true, autoIncrement : true  },
-    name : { type : sequelize.STRING },
-    age : { type : sequelize.INTEGER }
-  })
+const Users = mongoose.Schema({
+  name: {type: String},
+  age: {type: Number}
+})
   
-  module.exports = Users
+module.exports = mongoose.model('users',Users)

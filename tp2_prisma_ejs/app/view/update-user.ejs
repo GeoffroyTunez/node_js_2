@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modifier un utilisateur</h1>
+    <form id="editUserForm">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" value="<%= user.name %>" required />
+
+        <label for="age">Âge :</label>
+        <input type="number" id="age" name="age" value="<%= user.age %>" required />
+
+        <button type="submit">Modifier</button>
+    </form>
+    <a href="/view/users">Annuler</a>
+
+    <script>
+        const form = document.getElementById("editUserForm");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault()
+
+            const formData = new FormData(form)
+            const name = formData.get("name")
+            const age = formData.get("age")
+        
+
+            try {
+                const response = await fetch(`/users/<%= user.id %>`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({name, age}),
+                })
+
+                if (response.ok) {
+
+                    window.location.href = "/view/users"
+                } else {
+                    const error = await response.json()
+                    alert(error.message || "Erreur lors de la mise à jour")
+                }
+            } catch (err) {
+                console.error("Erreur :", err)
+                alert("Une erreur est survenue.")
+            }
+        })
+    </script>
+</body>
+</html>

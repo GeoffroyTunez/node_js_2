@@ -1,15 +1,19 @@
-const { Op } = require("sequelize")
 const Users = require("../model/Users")
+const {ObjectId} = require("mongoose").Types
 
 const controller = {}
 
 
 controller.all = async (req,res) =>{
-    var List_user = await Users.findAll()
-    if(List_user){
-        res.send(List_user)
-    }else{
-        res.send("No user found ")
+    try{
+        const users = await Users.find()
+        if(users){
+            res.send(users)
+        }else{
+            res.send("No user found")
+        }
+    }catch(err){
+        res.send("error : " + err)
     }
 
 }
@@ -18,9 +22,9 @@ controller.all = async (req,res) =>{
 controller.id = async (req, res) => {
     console.log("route id")
     res.setHeader('Content-type', 'application/json') 
-    var id_user = parseInt(req.params.id) 
-    if (id_user != 0 && id_user > 0) {
-        user = await Users.findByPk(id_user)
+    var id_user = (req.params.id) 
+    if (id_user != "") {
+        const user = await Users.findById(id_user)
         if (user) {
             res.json(user) 
         } else {
@@ -31,7 +35,7 @@ controller.id = async (req, res) => {
             res.status(404).json(error) 
         }
     } else {
-        return res.json({ "message": "Id non renseigné ou = / < à 0" }) 
+        return res.json({ "message": "Id non valide"}) 
     }
 
     
@@ -43,15 +47,15 @@ controller.index = async (req, res) => {
 
     if (page > 0 && limite > 0) {
         
-        var usersPage = await Users.findAndCountAll({
-            limite:limite,
-            offset: (page -1) * limite
-        })
-        
+        const skip = (page - 1) * limite
+        const usersPage = await Users.find()
+            .skip(skip)       
+            .limit(limite)
 
-        if (usersPage.count > 0) {
+
+        if (usersPage.length > 0) {
             res.setHeader('Content-Type', 'application/json') 
-            res.status(200).json({ "users": usersPage.rows }) 
+            res.status(200).json({ "users": usersPage }) 
         } else {
             res.status(404).json({
                 "message": "Aucun utilisateur trouvé",
@@ -70,33 +74,43 @@ controller.search = async (req, res) => {
     res.setHeader('Content-type', 'application/json')
     var name = req.query.name
 
+    
     if (name && name !== "") {
         var searchQuery = name.toLowerCase()
-        var matchingUsers = await Users.findAll({
-            where: {
-                name: {
-                    [Op.like]: `%${searchQuery}%` 
-                }
-            }
-        });
+        
+        try {
+            const matchingUsers = await Users.find({
+                name: { $regex: searchQuery, $options: 'i' }  
+            })
 
-        if (matchingUsers.length > 0) {
-            res.json(matchingUsers)
-        } else {
-            var error = {
-                "message": "Aucun utilisateur trouvé avec ce nom",
-                "status": "error"
+            if (matchingUsers.length > 0) {
+                res.json(matchingUsers)
+            } else {
+                
+                var error = {
+                    "message": "Aucun utilisateur trouvé avec ce nom",
+                    "status": "error"
+                }
+                res.status(404).json(error)
             }
-            res.status(404).json(error)
+        } catch (err) {
+            
+            var error = {
+                "message": "Une erreur est survenue lors de la recherche",
+                "status": "error",
+                "error": err.message
+            }
+            res.status(500).json(error)
         }
     } else {
+        
         var error = {
             "message": "Aucun nom renseigné",
             "status": "error"
         }
         res.status(400).json(error)
     }
-} 
+}
 
 controller.create = async (req, res) => {
     const { name, age } = req.body
@@ -108,15 +122,25 @@ controller.create = async (req, res) => {
         })
     }
 
-    const newUser = await Users.create({
-        name: name,
-        age: age
-    });
-    res.status(201).json({ newUser })
+    try {
+        const newUser = new Users({
+            name,
+            age
+        })
+
+        await newUser.save() 
+        res.status(201).json({ newUser })
+    } catch (err) {
+        res.status(500).json({
+            message: "Erreur lors de la création de l'utilisateur",
+            status: "error",
+            error: err.message
+        })
+    }
 } 
 
 controller.update = async (req, res) => {
-    var id = parseInt(req.params.id)
+    var id = (req.params.id)
     const { name, age } = req.body
 
     if (!name || name === "" || !age || age <= 0) {
@@ -126,51 +150,60 @@ controller.update = async (req, res) => {
         })
     }
 
-    var user = await Users.findByPk(id)
-    if (user) {
-
-        user = await Users.update(
-            {
-                name: name,
-                age: age 
-            },
-            {
-                where:{
-                    id: id
-                }
-
-            }
-        )
-        user = await Users.findByPk(id)
-        res.status(200).json({ user })
-    } else {
-        res.status(404).json({
-            "message": "Utilisateur non trouvé",
-            "status": "error"
+    try {
+        const user = await Users.findById(id)  
+        if (user) {
+            user.name = name
+            user.age = age
+            await user.save()  
+            res.json(user)
+        } else {
+            res.status(404).json({
+                message: "Utilisateur non trouvé",
+                status: "error"
+            })
+        }
+    } catch (err) {
+        res.status(500).json({
+            message: "Erreur lors de la mise à jour de l'utilisateur",
+            status: "error",
+            error: err.message
         })
     }
 }
 
 controller.delete = async (req, res) => {
-    const id = parseInt(req.params.id)
-    const userIndex = await Users.findByPk(id)
+    const id = req.params.id
 
-    if (userIndex !== -1) {
-        await Users.destroy({
-            where: {
-                id: id
-            }
+    try {
+        // Recherche de l'utilisateur avec l'ID spécifié
+        const user = await Users.findById(id)  
+
+        // Si l'utilisateur est trouvé
+        if (user) {
+            // Suppression de l'utilisateur
+            await user.deleteOne()  // Utilise deleteOne() pour supprimer le document
+            
+            res.json({
+                message: "Utilisateur supprimé avec succès",
+                status: "success"
+            })
+        } else {
+            // Si l'utilisateur n'est pas trouvé
+            res.status(404).json({
+                message: "Utilisateur non trouvé",
+                status: "error"
+            })
+        }
+    } catch (err) {
+        // Gestion des erreurs
+        res.status(500).json({
+            message: "Erreur lors de la suppression de l'utilisateur",
+            status: "error",
+            error: err.message
         })
-        return res.status(200).json({
-            "message": "Utilisateur supprimé avec succès",
-            "status": "success"
-        }) 
-    } else {
-        return res.status(404).json({
-            "message": "Utilisateur non trouvé",
-            "status": "error"
-        }) 
     }
-} 
+}
+
 
 module.exports = controller 
